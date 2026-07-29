@@ -1,0 +1,23 @@
+# Grow Field Service
+
+Grow Field Service is a growth system — professional website plus always-on local SEO — built for field service and trades business owners who want to grow without hiring a marketing agency.
+
+## Who it's for
+
+Field service and trades business owners (HVAC, plumbing, electrical, landscaping, etc.) who want consistent inbound leads from Google and Maps without managing an agency relationship.
+
+## What it does
+
+- Delivers a conversion-focused website tied to the owner's existing field service management software
+- Maintains ongoing local SEO so the business ranks for relevant searches over time
+- Syncs with FSM platforms so the site reflects current services and booking flow
+
+## Integrations
+
+Works with: Jobber, ServiceTitan, Housecall Pro. Other FSM platforms: contact for availability.
+
+## Status
+
+Early access / waitlist. Not yet publicly available in all markets.
+
+URL: https://growfieldservice.com

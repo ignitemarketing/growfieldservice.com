@@ -1,0 +1,37 @@
+export const content = {
+  brand: 'Grow Field Service',
+  domain: 'growfieldservice.com',
+  serviceType: 'Growth platform for field-service businesses',
+  title: 'Grow Field Service — Grow Your Business Without an Agency',
+  description: 'Grow your field service business without hiring an agency. A website and always-on SEO that works while you work, wired to Jobber, ServiceTitan, and Housecall Pro.',
+  navCta: 'Join the waitlist',
+  badge: 'Early access · growth for field service',
+  h1a: 'Grow your field service business — ', h1grad: 'without hiring an agency', h1b: '.',
+  sub: 'A professional website and always-on local SEO that keep bringing in work while you\'re on the tools. No agency retainer, no marketing degree — wired to the software you already run.',
+  trust: 'Set up once. Works in the background, every month.',
+  mock: ['trending', 'search', 'star'],
+  mockStat: 'Growth engine',
+  featHead: {
+    eyebrow: 'The growth system',
+    title: 'Marketing that runs itself.',
+    sub: 'Everything an agency would charge you a retainer for — the website, the SEO, the reviews — handled, and tied to your real jobs.',
+  },
+  features: [
+    { icon: 'globe', title: 'A site that converts', body: 'A fast, modern website built to turn visitors into booked work — not a brochure that just sits there looking nice.' },
+    { icon: 'trending', title: 'Always-on local SEO', body: 'We keep you ranking for the searches that matter in your service area, and the gains compound month over month.' },
+    { icon: 'star', title: 'Reviews on autopilot', body: 'Review requests fire when a job closes in your software, building the reputation that wins the next customer.' },
+  ],
+  intsHead: {
+    title: 'Growth that knows your business',
+    sub: 'Because it\'s wired to your field-service software, your marketing reflects your real services, availability, and completed jobs — automatically.',
+  },
+  ints: [
+    { brand: 'Jobber', body: 'Your services and availability flow into the site, kept current without manual updates.' },
+    { brand: 'ServiceTitan', body: 'Completed jobs power review requests and keep your local presence fresh.' },
+    { brand: 'Housecall Pro', body: 'Customer and job data sync so growth efforts target your real operation.' },
+  ],
+  ctaTitle: 'Grow without the agency bill.',
+  ctaSub: 'We\'re onboarding a small group of field-service owners into early access. Join the waitlist and help shape what we build first.',
+  ctaList: ['No pricing commitment', 'No long-term contract', 'Priority onboarding when we open'],
+  footerTag: 'Grow your field service business — without hiring an agency.',
+};
