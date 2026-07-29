@@ -1,4 +1,5 @@
 interface Env {
+  ASSETS: { fetch(request: Request): Promise<Response> };
   POSTMARK_SERVER_TOKEN: string;
 }
 
@@ -9,8 +10,7 @@ const ALLOWED_FSM = ['Jobber', 'ServiceTitan', 'Housecall Pro', 'Other', ''];
 const NOTIFY_TO = 'colin+newco@colingreig.com';
 const NOTIFY_FROM = 'newco@jdmbuysell.com';
 
-export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { request, env } = context;
+async function handleWaitlist(request: Request, env: Env): Promise<Response> {
   const json = (body: unknown, status = 200) =>
     new Response(JSON.stringify(body), {
       status,
@@ -88,4 +88,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   return json({ ok: true });
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+    if (url.pathname === '/api/waitlist' && request.method === 'POST') {
+      return handleWaitlist(request, env);
+    }
+    return env.ASSETS.fetch(request);
+  },
 };
