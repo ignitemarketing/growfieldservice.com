@@ -1,0 +1,17 @@
+# Custom response headers for Cloudflare Workers Static Assets.
+# Docs: https://developers.cloudflare.com/workers/static-assets/headers/
+#
+# Astro copies public/ to dist/ at build time, and this rule file is parsed by
+# Workers (not served). HTML keeps the platform default
+# (public, max-age=0, must-revalidate) so pages always revalidate.
+
+# Build output under /_astro/ is content-hashed: a given URL never changes.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Stable public file names: cache for a day in the browser.
+/og.png
+  Cache-Control: public, max-age=86400
+
+/favicon.svg
+  Cache-Control: public, max-age=86400

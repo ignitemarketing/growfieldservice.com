@@ -1,0 +1,3 @@
+# Canonical sitemap URL: robots.txt and search engines expect /sitemap.xml.
+# @astrojs/sitemap emits the index at /sitemap-index.xml; keep both working.
+/sitemap.xml /sitemap-index.xml 301
