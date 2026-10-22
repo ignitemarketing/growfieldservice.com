@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import { content as c } from '../content';
+
+// Same brand mark as the homepage header (single instance per page).
+const mark = `<svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#8b8cff"/><stop offset="1" stop-color="#43c4ff"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#g)"/><path d="M9 20.5 15 9l3.2 6.2L22 11" stroke="#0a0b12" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+---
+<Base path="/404" title={`Page not found — ${c.brand}`} noindex>
+  <header class="hdr">
+    <div class="wrap hdr-inner">
+      <a class="brand" href="/" aria-label={`${c.brand} home`}><Fragment set:html={mark} />{c.brand}</a>
+      <a class="hdr-cta" href="/#waitlist">{c.navCta}</a>
+    </div>
+  </header>
+
+  <main class="nf">
+    <div class="wrap nf-inner">
+      <p class="nf-code" aria-hidden="true">404</p>
+      <span class="eyebrow">Page not found</span>
+      <h1>That page took a wrong turn.</h1>
+      <p class="nf-sub">
+        The page you were looking for isn&rsquo;t here. It may have moved, or the link may be mistyped.
+      </p>
+      <div class="nf-actions">
+        <a class="btn btn-primary" href="/">Back to the homepage</a>
+        <a class="btn btn-ghost" href="/#waitlist">{c.navCta}</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="ftr"><div class="wrap">
+    <div class="ftr-inner">
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+        <a class="brand" href="/"><Fragment set:html={mark} />{c.brand}</a>
+        <span class="tag">{c.footerTag}</span>
+      </div>
+      <div class="meta"><span>Built by <a href="https://ignitemarketing.com">Ignite Marketing</a></span><span>© 2026 {c.brand}</span></div>
+    </div>
+  </div></footer>
+</Base>
+
+<style>
+  .nf { padding: 96px 0 104px; }
+  .nf-inner { max-width: 640px; }
+  .nf-code {
+    font-family: var(--font-display, 'Space Grotesk', sans-serif);
+    font-weight: 600;
+    font-size: clamp(4.5rem, 14vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .nf h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    margin-top: 14px;
+  }
+  .nf-sub {
+    margin-top: 16px;
+    color: var(--fg-muted);
+    font-size: 1.075rem;
+    max-width: 46ch;
+  }
+  .nf-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  @media (max-width: 600px) {
+    .nf { padding: 64px 0 72px; }
+  }
+</style>
