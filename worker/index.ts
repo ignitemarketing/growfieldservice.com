@@ -1,14 +1,14 @@
 interface Env {
   ASSETS: { fetch(request: Request): Promise<Response> };
+  // Worker secrets (set with `wrangler secret put`), kept out of the public repo:
+  // where signup notifications go, and the verified Postmark sender they come from.
+  NOTIFY_TO: string;
+  NOTIFY_FROM: string;
   POSTMARK_SERVER_TOKEN: string;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ALLOWED_FSM = ['Jobber', 'ServiceTitan', 'Housecall Pro', 'Other', ''];
-
-// Where signup notifications go, and the verified Postmark sender they come from.
-const NOTIFY_TO = 'colin+newco@colingreig.com';
-const NOTIFY_FROM = 'newco@jdmbuysell.com';
 
 async function handleWaitlist(request: Request, env: Env): Promise<Response> {
   const json = (body: unknown, status = 200) =>
@@ -16,6 +16,11 @@ async function handleWaitlist(request: Request, env: Env): Promise<Response> {
       status,
       headers: { 'content-type': 'application/json' },
     });
+
+  if (!env.NOTIFY_TO || !env.NOTIFY_FROM) {
+    console.error('waitlist: NOTIFY_TO / NOTIFY_FROM secrets are not set');
+    return json({ ok: false, error: 'server_error' }, 500);
+  }
 
   let data: Record<string, unknown>;
   try {
@@ -72,8 +77,8 @@ async function handleWaitlist(request: Request, env: Env): Promise<Response> {
         'X-Postmark-Server-Token': env.POSTMARK_SERVER_TOKEN,
       },
       body: JSON.stringify({
-        From: NOTIFY_FROM,
-        To: NOTIFY_TO,
+        From: env.NOTIFY_FROM,
+        To: env.NOTIFY_TO,
         ReplyTo: email,
         Subject: `[newco] Waitlist: ${source} — ${email}`,
         TextBody: textBody,
