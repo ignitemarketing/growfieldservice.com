@@ -1,10 +1,20 @@
 interface Env {
   ASSETS: { fetch(request: Request): Promise<Response> };
+  // Cloudflare Email Routing send binding (`send_email` in wrangler.jsonc), restricted
+  // to one verified destination address.
+  EMAIL: {
+    send(message: {
+      to: string;
+      from: string;
+      replyTo?: string;
+      subject: string;
+      text: string;
+    }): Promise<unknown>;
+  };
   // Worker secrets (set with `wrangler secret put`), kept out of the public repo:
-  // where signup notifications go, and the verified Postmark sender they come from.
+  // where signup notifications go, and the sender address on the zone they come from.
   NOTIFY_TO: string;
   NOTIFY_FROM: string;
-  POSTMARK_SERVER_TOKEN: string;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -72,26 +82,15 @@ async function handleWaitlist(request: Request, env: Env): Promise<Response> {
   ].join('\n');
 
   try {
-    const res = await fetch('https://api.postmarkapp.com/email', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-Postmark-Server-Token': env.POSTMARK_SERVER_TOKEN,
-      },
-      body: JSON.stringify({
-        From: env.NOTIFY_FROM,
-        To: env.NOTIFY_TO,
-        ReplyTo: email,
-        Subject: `[newco] Waitlist: ${source} — ${email}`,
-        TextBody: textBody,
-        MessageStream: 'outbound',
-      }),
+    await env.EMAIL.send({
+      from: env.NOTIFY_FROM,
+      to: env.NOTIFY_TO,
+      replyTo: email,
+      subject: `[newco] Waitlist: ${source} — ${email}`,
+      text: textBody,
     });
-    if (!res.ok) {
-      return json({ ok: false, error: 'server_error' }, 500);
-    }
-  } catch {
+  } catch (err) {
+    console.error('waitlist: send_email failed', err);
     return json({ ok: false, error: 'server_error' }, 500);
   }
 
