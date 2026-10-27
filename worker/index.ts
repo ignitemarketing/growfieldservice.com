@@ -14,7 +14,10 @@ async function handleWaitlist(request: Request, env: Env): Promise<Response> {
   const json = (body: unknown, status = 200) =>
     new Response(JSON.stringify(body), {
       status,
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        'x-content-type-options': 'nosniff',
+      },
     });
 
   if (!env.NOTIFY_TO || !env.NOTIFY_FROM) {
