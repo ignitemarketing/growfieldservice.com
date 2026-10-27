@@ -25,6 +25,9 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
+        env:
+          # Public Turnstile site key (repo variable); empty builds the form without the widget.
+          PUBLIC_TURNSTILE_SITEKEY: ${{ vars.TURNSTILE_SITEKEY }}
       - name: Deploy Workers Static Assets
         run: pnpm exec wrangler deploy --config wrangler.jsonc
         env:
