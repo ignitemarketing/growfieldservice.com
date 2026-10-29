@@ -5,8 +5,8 @@
 # Workers (not served). HTML keeps the platform default
 # (public, max-age=0, must-revalidate) so pages always revalidate.
 
-# Security headers for every static response. Worker-generated responses
-# (/api/waitlist) do not pass through this file; worker/index.ts sets its own.
+# Security headers for every static response. Form posts (/api/forms/*) are
+# handled by the shared ignite-forms Worker mounted on the zone.
 # A full default-src/script-src CSP needs the inline Waitlist module script
 # hashed or externalized first (follow-up).
 /*

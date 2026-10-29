@@ -4,13 +4,8 @@
   "workers_dev": false,
   "preview_urls": false,
   "compatibility_date": "2026-07-01",
-  "main": "./worker/index.ts",
-  "send_email": [
-    { "name": "EMAIL", "destination_address": "colin+fieldservice@colingreig.com" }
-  ],
   "assets": {
     "directory": "./dist",
-    "binding": "ASSETS",
     "not_found_handling": "404-page"
   }
 }
